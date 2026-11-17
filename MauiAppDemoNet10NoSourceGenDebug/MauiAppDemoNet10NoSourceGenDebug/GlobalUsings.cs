@@ -1,0 +1,6 @@
+global using Fonts;
+global using MauiAppDemoNet10NoSourceGenDebug.Data;
+global using MauiAppDemoNet10NoSourceGenDebug.PageModels;
+global using MauiAppDemoNet10NoSourceGenDebug.Pages;
+global using MauiAppDemoNet10NoSourceGenDebug.Services;
+global using MauiAppDemoNet10NoSourceGenDebug.Utilities;

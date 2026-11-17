@@ -1,0 +1,608 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MyStock" xml:space="preserve">
+    <value>My Stock</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="ExpiringSoon" xml:space="preserve">
+    <value>Expiring Soon</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="ExpiresToday" xml:space="preserve">
+    <value>Expires Today</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="Expired" xml:space="preserve">
+    <value>Expired</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="MyStorageLocations" xml:space="preserve">
+    <value>My Storage Locations</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="NoDataTitle" xml:space="preserve">
+    <value>Oh, it looks really empty here!</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="NoDataDescription" xml:space="preserve">
+    <value>It seems you haven't added any storage spots, like a fridge or pantry, to the app for tracking your food.</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="GetStarted" xml:space="preserve">
+    <value>Let's get started!</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="StartWithSuggestedLocations" xml:space="preserve">
+    <value>Start with suggested locations</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="SuggestedLocationsDescription" xml:space="preserve">
+    <value>We'll create some basic locations for you, such as 'fridge' and 'pantry,' so you can hit the ground running! Feel free to rename or delete these locations later on.</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="StartWithSuggestedLocationsAndStock" xml:space="preserve">
+    <value>Start with suggested locations and stock</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="SuggestedLocationsAndStockDescription" xml:space="preserve">
+    <value>Not only will we add locations like 'fridge,' but we'll also include some food items to show you how it all works! You're free to customize or remove these locations and items later.</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="CreateNewLocationLinkText" xml:space="preserve">
+    <value>Create a new location</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="CreateNewLocationDescription" xml:space="preserve">
+    <value>Start by creating a new location, like your fridge, to begin organizing your food.</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="AddEntry" xml:space="preserve">
+    <value>Add Entry</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="CreateNewLocation" xml:space="preserve">
+    <value>Create New Location</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="XItems" xml:space="preserve">
+    <value>{0} entries</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="AppName" xml:space="preserve">
+    <value>Don't let me expire</value>
+    <comment>AppShell</comment>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+    <comment>AppShell</comment>
+  </data>
+  <data name="DeleteImage" xml:space="preserve">
+    <value>Delete Image</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="TapToAddImage" xml:space="preserve">
+    <value>Tap here to add an image</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="ErrorsHeader" xml:space="preserve">
+    <value>There are some errors!</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="ErrorsSubHeader" xml:space="preserve">
+    <value>Correct them below and try again.</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="StorageLocation" xml:space="preserve">
+    <value>Storage location</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="ExpirationDate" xml:space="preserve">
+    <value>Expiration Date</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Amount</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="Today" xml:space="preserve">
+    <value>Today</value>
+    <comment>DateToRelativeStringConverter</comment>
+  </data>
+  <data name="Tomorrow" xml:space="preserve">
+    <value>Tomorrow</value>
+    <comment>DateToRelativeStringConverter</comment>
+  </data>
+  <data name="Yesterday" xml:space="preserve">
+    <value>Yesterday</value>
+    <comment>DateToRelativeStringConverter</comment>
+  </data>
+  <data name="LastWeek" xml:space="preserve">
+    <value>Last week</value>
+    <comment>DateToRelativeStringConverter</comment>
+  </data>
+  <data name="XDaysAgo" xml:space="preserve">
+    <value>{0} days ago</value>
+    <comment>DateToRelativeStringConverter</comment>
+  </data>
+  <data name="InXDays" xml:space="preserve">
+    <value>In {0} days</value>
+    <comment>DateToRelativeStringConverter</comment>
+  </data>
+  <data name="NextWeek" xml:space="preserve">
+    <value>Next week</value>
+    <comment>DateToRelativeStringConverter</comment>
+  </data>
+  <data name="InTwoWeeks" xml:space="preserve">
+    <value>In two weeks</value>
+    <comment>DateToRelativeStringConverter</comment>
+  </data>
+  <data name="InThreeWeeks" xml:space="preserve">
+    <value>In three weeks</value>
+    <comment>DateToRelativeStringConverter</comment>
+  </data>
+  <data name="InMoreThanAMonth" xml:space="preserve">
+    <value>In more than a month</value>
+    <comment>DateToRelativeStringConverter</comment>
+  </data>
+  <data name="RequiredErrorMessage" xml:space="preserve">
+    <value>The field {0} is required.</value>
+    <comment>ItemViewModel</comment>
+  </data>
+  <data name="RangeErrorMessage" xml:space="preserve">
+    <value>The field {0} must be between {1} and {2}.</value>
+    <comment>ItemViewModel</comment>
+  </data>
+  <data name="LengthErrorMessage" xml:space="preserve">
+    <value>The length of the field {0} must be between {1} and {2}.</value>
+    <comment>ItemViewModel</comment>
+  </data>
+  <data name="NewEntry" xml:space="preserve">
+    <value>New Entry</value>
+    <comment>ItemViewModel</comment>
+  </data>
+  <data name="SearchBarcode" xml:space="preserve">
+    <value>Search Barcode</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning</value>
+    <comment>AlertService</comment>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>AlertService</comment>
+  </data>
+  <data name="ResetAppWarnining" xml:space="preserve">
+    <value>Resetting the app will erase all your data, including locations, stock, and any custom settings. This action cannot be undone. Are you sure you want to proceed?</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="RestartApp" xml:space="preserve">
+    <value>Restart App</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="RestartAppLanguageChange" xml:space="preserve">
+    <value>Please restart the app to apply the language change</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="PleaseRestart" xml:space="preserve">
+    <value>Please restart the app!</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="German" xml:space="preserve">
+    <value>German</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>Dark</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Light</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Theme</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>(Default)</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
+    <comment>AlertService</comment>
+  </data>
+  <data name="ResetApp" xml:space="preserve">
+    <value>Reset App</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="CaptureWithAi" xml:space="preserve">
+    <value>Capture with AI</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="PickPhotoWithAi" xml:space="preserve">
+    <value>Pick photo</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="AiRecognizing" xml:space="preserve">
+    <value>AI is analyzing the photo…</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="AiDatePrinted" xml:space="preserve">
+    <value>Expiration date read from the package</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="AiDateEstimated" xml:space="preserve">
+    <value>Expiration date estimated by AI – please check</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="AiError" xml:space="preserve">
+    <value>AI recognition failed: {0}</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="AiNotConfigured" xml:space="preserve">
+    <value>AI is not configured (endpoint or key missing).</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="ToolCalls" xml:space="preserve">
+    <value>AI tool calls</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="ShowToolCalls" xml:space="preserve">
+    <value>Show AI tool calls</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="UseLocalAi" xml:space="preserve">
+    <value>Use on-device AI (Apple Intelligence)</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="LocalAiUnavailable" xml:space="preserve">
+    <value>On-device AI not available ({0}) – using cloud</value>
+    <comment>AI</comment>
+  </data>
+  <data name="LocalAiNoImages" xml:space="preserve">
+    <value>On-device model can't read images – using cloud</value>
+    <comment>AI</comment>
+  </data>
+  <data name="AiViaLocal" xml:space="preserve">
+    <value>via Apple Intelligence (on device)</value>
+    <comment>AI</comment>
+  </data>
+  <data name="AiViaCloud" xml:space="preserve">
+    <value>via Azure OpenAI ({0})</value>
+    <comment>AI</comment>
+  </data>
+  <data name="AnotherPhoto" xml:space="preserve">
+    <value>Take another photo?</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="AnotherPhotoMessage" xml:space="preserve">
+    <value>For example the back with barcode and best-before date.</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="YesAnswer" xml:space="preserve">
+    <value>Yes</value>
+    <comment>Common</comment>
+  </data>
+  <data name="NoAnswer" xml:space="preserve">
+    <value>No</value>
+    <comment>Common</comment>
+  </data>
+  <data name="LocalAiOneImage" xml:space="preserve">
+    <value>On-device model reads only one image – using cloud</value>
+    <comment>AI</comment>
+  </data>
+  <data name="LocalAiNoTools" xml:space="preserve">
+    <value>On-device model can't call tools – using cloud</value>
+    <comment>AI</comment>
+  </data>
+  <data name="SpeakCorrection" xml:space="preserve">
+    <value>Correct by voice</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="Listening" xml:space="preserve">
+    <value>Listening …</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="VoiceError" xml:space="preserve">
+    <value>Speech recognition failed: {0}</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="FromReplay" xml:space="preserve">
+    <value>replayed from recording</value>
+    <comment>AI</comment>
+  </data>
+  <data name="Cooked" xml:space="preserve">
+    <value>Cooked – remove used items</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="CookedConfirm" xml:space="preserve">
+    <value>Remove these items from your stock?</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="PantryChat" xml:space="preserve">
+    <value>Pantry chat</value>
+    <comment>Shell</comment>
+  </data>
+  <data name="ChatPlaceholder" xml:space="preserve">
+    <value>Ask about your stock …</value>
+    <comment>ChatPage</comment>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+    <comment>ChatPage</comment>
+  </data>
+  <data name="NewChat" xml:space="preserve">
+    <value>New chat</value>
+    <comment>ChatPage</comment>
+  </data>
+  <data name="ConfirmDeleteByAi" xml:space="preserve">
+    <value>The AI wants to remove “{0}” from your stock. Allow?</value>
+    <comment>ChatPage</comment>
+  </data>
+  <data name="ReplayMode" xml:space="preserve">
+    <value>AI answers</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="ReplayOff" xml:space="preserve">
+    <value>Live</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="ReplayAuto" xml:space="preserve">
+    <value>Live, replay recording on errors</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="ReplayOnly" xml:space="preserve">
+    <value>Replay recordings only</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="ClearRecordings" xml:space="preserve">
+    <value>Delete recordings ({0})</value>
+    <comment>SettingsPage</comment>
+  </data>
+  <data name="NoRecording" xml:space="preserve">
+    <value>No recording for this request (replay only).</value>
+    <comment>AI</comment>
+  </data>
+  <data name="RecipeCardTitle" xml:space="preserve">
+    <value>Recipe from leftovers</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="RecipeCardSubtitle" xml:space="preserve">
+    <value>{0} items expire soon – let AI cook something up</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="RecipeCardNothing" xml:space="preserve">
+    <value>Nothing expires soon right now</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="DateTypeLabel" xml:space="preserve">
+    <value>Date on the package</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="DateTypeBestBefore" xml:space="preserve">
+    <value>Best before (MHD)</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="DateTypeUseBy" xml:space="preserve">
+    <value>Use by</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="DateTypeEstimated" xml:space="preserve">
+    <value>Estimated (no date on package)</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="AskAi" xml:space="preserve">
+    <value>Ask AI</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="Opened" xml:space="preserve">
+    <value>Opened</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="OpenedHint" xml:space="preserve">
+    <value>Opened: AI adjusted the date – {0}</value>
+    <comment>ItemPage</comment>
+  </data>
+  <data name="AiDisclaimer" xml:space="preserve">
+    <value>AI assessment, no guarantee. If in doubt, throw it out.</value>
+    <comment>ItemChat</comment>
+  </data>
+  <data name="TakePhotoForAi" xml:space="preserve">
+    <value>Take a photo</value>
+    <comment>ItemChat</comment>
+  </data>
+  <data name="QuestionCanIEat" xml:space="preserve">
+    <value>Can I still eat this?</value>
+    <comment>ItemChat</comment>
+  </data>
+  <data name="QuestionHowToCheck" xml:space="preserve">
+    <value>How can I tell if it has gone bad?</value>
+    <comment>ItemChat</comment>
+  </data>
+  <data name="QuestionFreeze" xml:space="preserve">
+    <value>Can I freeze this?</value>
+    <comment>ItemChat</comment>
+  </data>
+  <data name="QuestionCook" xml:space="preserve">
+    <value>What can I cook with it?</value>
+    <comment>ItemChat</comment>
+  </data>
+  <data name="QuestionStore" xml:space="preserve">
+    <value>How do I store it properly?</value>
+    <comment>ItemChat</comment>
+  </data>
+  <data name="VerdictLikelyFine" xml:space="preserve">
+    <value>Probably still fine</value>
+    <comment>ItemChat</comment>
+  </data>
+  <data name="VerdictCheckFirst" xml:space="preserve">
+    <value>Check it first</value>
+    <comment>ItemChat</comment>
+  </data>
+  <data name="VerdictDoNotEat" xml:space="preserve">
+    <value>Do not eat</value>
+    <comment>ItemChat</comment>
+  </data>
+  <data name="VerdictNeedPhoto" xml:space="preserve">
+    <value>Photo needed</value>
+    <comment>ItemChat</comment>
+  </data>
+  <data name="SafetyUseByExpired" xml:space="preserve">
+    <value>The use-by date has passed. Please do not eat it anymore – even if it still looks fine.</value>
+    <comment>ItemChat</comment>
+  </data>
+  <data name="RecipeGenerating" xml:space="preserve">
+    <value>Creating a recipe …</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="RecipeNothingExpiring" xml:space="preserve">
+    <value>Nothing expires soon, so there is nothing to cook a recipe from.</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="RecipeError" xml:space="preserve">
+    <value>Creating the recipe failed: {0}</value>
+    <comment>MainPage</comment>
+  </data>
+  <data name="VoicePermissionDenied" xml:space="preserve">
+    <value>Microphone or speech recognition is not allowed.</value>
+    <comment>Voice</comment>
+  </data>
+  <data name="VoiceRecognitionFailed" xml:space="preserve">
+    <value>Speech recognition failed.</value>
+    <comment>Voice</comment>
+  </data>
+</root>

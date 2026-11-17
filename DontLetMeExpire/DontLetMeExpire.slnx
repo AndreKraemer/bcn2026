@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="DontLetMeExpire.AppHost/DontLetMeExpire.AppHost.csproj" />
+  <Project Path="DontLetMeExpire.MauiServiceDefaults/DontLetMeExpire.MauiServiceDefaults.csproj" />
+  <Project Path="DontLetMeExpire/DontLetMeExpire.csproj">
+    <Deploy />
+  </Project>
+</Solution>

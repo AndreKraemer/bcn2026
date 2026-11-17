@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="MauiAppMaterial3Demo/MauiAppMaterial3Demo.csproj">
+    <Deploy />
+  </Project>
+</Solution>

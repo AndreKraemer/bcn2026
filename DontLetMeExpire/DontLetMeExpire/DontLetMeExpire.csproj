@@ -1,0 +1,162 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net11.0-android</TargetFrameworks>
+		<TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('linux'))">$(TargetFrameworks);net11.0-ios;net11.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net11.0-windows10.0.19041.0</TargetFrameworks>
+
+		<!-- Note for MacCatalyst:
+		The default runtime is maccatalyst-x64, except in Release config, in which case the default is maccatalyst-x64;maccatalyst-arm64.
+		When specifying both architectures, use the plural <RuntimeIdentifiers> instead of the singular <RuntimeIdentifier>.
+		The Mac App Store will NOT accept apps with ONLY maccatalyst-arm64 indicated;
+		either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
+		<!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
+
+		<OutputType>Exe</OutputType>
+		<RootNamespace>DontLetMeExpire</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<!-- Always use the latest stable .NET MAUI 11 release from NuGet -->
+		<MauiVersion>11.*</MauiVersion>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<!-- Display name -->
+		<ApplicationTitle>DontLetMeExpire</ApplicationTitle>
+
+		<!-- App Identifier -->
+		<ApplicationId>com.companyname.dontletmeexpire</ApplicationId>
+
+		<!-- Versions -->
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">17.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">24.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+		<NeutralLanguage>en-US</NeutralLanguage>
+		<!-- Im Debug validiert XamlC nur und die XAML wird zur Laufzeit geparst. Das schlaegt unter
+		     iOS/Mac Catalyst fehl. Daher XamlC (fuer App.xaml) auch im Debug wirklich kompilieren.
+		     Siehe maui-buch-2024, Kap18/StylesSample. -->
+		<_MauiForceXamlCForDebug>True</_MauiForceXamlCForDebug>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(TargetFramework)'=='net11.0-ios'">
+		<CodesignKey>Apple Development: André Krämer (GM64FQT723)</CodesignKey>
+		<CodesignProvision>VS: WildCard Development</CodesignProvision>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#3d6dcc" />
+
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#3d6dcc" BaseSize="128,128" />
+
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*" />
+		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
+
+		<!-- Custom Fonts -->
+		<MauiFont Include="Resources\Fonts\*" />
+
+		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+
+
+	<ItemGroup>
+		<PackageReference Include="Azure.AI.OpenAI" Version="2.9.0-beta.1" />
+		<!-- Barcode-Scanner: Camera.MAUI funktioniert ab .NET 10 nicht mehr (siehe maui-buch-2024, Kap21) -->
+		<PackageReference Include="ZXing.Net.Maui" Version="0.10.4" />
+		<PackageReference Include="ZXing.Net.Maui.Controls" Version="0.10.4" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="17.0.0" />
+		<PackageReference Include="Microsoft.Extensions.AI" Version="11.0.0" />
+		<PackageReference Include="Microsoft.Extensions.AI.OpenAI" Version="11.0.0" />
+		<!-- Lokale KI: Apple Intelligence (iOS/macOS 26+), nur fuer Apple-Plattformen eingebunden
+		     (unter Android wuerde das Paket wegen Gemini Nano minSdk 26 verlangen). Preview-API: MAUIAI0001. -->
+		<PackageReference Include="Microsoft.Maui.Essentials.AI" Version="11.*-*"
+		                  Condition="'$([MSBuild]::GetTargetPlatformIdentifier($(TargetFramework)))' == 'ios' or '$([MSBuild]::GetTargetPlatformIdentifier($(TargetFramework)))' == 'maccatalyst'" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="11.0.0" />
+		<PackageReference Include="Plugin.Maui.MarkdownView" Version="1.0.5" />
+		<!-- 1.11: zieht ein SQLitePCLRaw ohne die bekannte Sicherheitsluecke (NU1903) -->
+		<PackageReference Include="sqlite-net-pcl" Version="1.11.285" />
+		<PackageReference Include="Syncfusion.Maui.Toolkit" Version="1.0.12" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\DontLetMeExpire.MauiServiceDefaults\DontLetMeExpire.MauiServiceDefaults.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Resources\Strings\AppResources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>AppResources.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="Resources\Strings\AppResources.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+			<LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- MAUI 11: Der XAML-Sourcegenerator erzeugt fuer <StyleSheet Source=".css"> nicht kompilierbaren Code
+		     (https://github.com/dotnet/maui/issues/40232). App.xaml daher mit XamlC verarbeiten.
+		     Siehe auch _MauiForceXamlCForDebug weiter unten. -->
+		<MauiXaml Update="App.xaml" Inflator="XamlC" />
+		<MauiXaml Update="AppWindow.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Controls\DashboardTile.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Resources\Styles\AppStyles.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Resources\Styles\MaterialSymbolsRounded.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\ItemPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\ItemsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\SettingsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+	</ItemGroup>
+	<!--
+	  AI-Keys: Beim Build werden die Umgebungsvariablen AI_Foundry_Endpoint, AI_Foundry_ApiKey und optional AI_Foundry_Model
+	  in eine generierte Klasse (obj/.../AiSecrets.g.cs) geschrieben. Nichts davon landet im Git.
+	  Visual Studio nach dem Setzen der Variablen neu starten (MSBuild sieht nur Variablen vom Prozessstart).
+	  Beim Remote-Build fuer iOS (gekoppelter Mac) wird C# auf Windows kompiliert:
+	  die Variablen muessen also nur auf dem Windows-Rechner gesetzt sein.
+	  Wird die App ueber Aspire gestartet, haben die Werte aus dem AppHost Vorrang (siehe AiSettings.cs).
+	-->
+	<Target Name="GenerateAiSecrets" BeforeTargets="BeforeBuild;CoreCompile">
+		<Warning Condition="'$(AI_Foundry_Endpoint)' == '' or '$(AI_Foundry_ApiKey)' == ''"
+		         Text="AI_Foundry_Endpoint und/oder AI_Foundry_ApiKey sind nicht gesetzt. KI funktioniert dann nur, wenn die App ueber Aspire gestartet wird." />
+		<PropertyGroup>
+			<_AiSecretsFile>$(IntermediateOutputPath)AiSecrets.g.cs</_AiSecretsFile>
+		</PropertyGroup>
+		<WriteLinesToFile File="$(_AiSecretsFile)" Overwrite="true" WriteOnlyWhenDifferent="true"
+		                  Lines="namespace DontLetMeExpire%3B internal static class AiSecrets { public const string Endpoint = &quot;$(AI_Foundry_Endpoint)&quot;%3B public const string ApiKey = &quot;$(AI_Foundry_ApiKey)&quot;%3B public const string Model = &quot;$(AI_Foundry_Model)&quot;%3B }" />
+		<ItemGroup>
+			<Compile Include="$(_AiSecretsFile)" />
+			<FileWrites Include="$(_AiSecretsFile)" />
+		</ItemGroup>
+	</Target>
+
+	<PropertyGroup>
+		<DefineConstants>$(DefineConstants);MauiAllowImplicitXmlnsDeclaration</DefineConstants>
+	</PropertyGroup>
+</Project>

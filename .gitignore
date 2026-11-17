@@ -1,0 +1,150 @@
+# Root .gitignore for multi-project repo: .NET + MAUI + Vue/Node + IDE/OS
+# Recommended: keep project-specific .gitignore files for finer control in subprojects
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Visual Studio / .NET
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Rider / JetBrains
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+.vscode-test/
+
+# Build directories
+**/bin/
+**/obj/
+**/AppPackages/
+**/publish/
+**/artifacts/
+
+# ASP.NET / web artifacts
+*.publish.xml
+*.publishsettings
+wwwroot/lib/**/dist/
+# Explicitly allow bootstrap dist used in BlazorHybrid shared assets
+!**/wwwroot/lib/bootstrap/dist/
+!**/wwwroot/lib/bootstrap/dist/**
+
+# NuGet
+*.nupkg
+.packages/
+.nuget/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Rider
+.idea/
+*.sln.iml
+
+# .NET tests / coverage
+TestResults/
+*.trx
+*.coverage
+coverage/*.coverage
+coverage/
+lcov.info
+
+# MAUI / Xamarin artifacts
+**/Properties/PublishProfiles/
+*.dbmdl
+
+# Node / npm / pnpm / yarn
+node_modules/
+.pnp.cjs
+.pnp.js
+.pnpm-debug.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Frontend build outputs
+dist/
+# Keep Blazor/WWWRoot static assets (like bootstrap dist in myblazor.shared/wwwroot/dist)
+!**/wwwroot/dist/    # unignore dist folders directly under any wwwroot (track bootstrap .dist in Blazor)
+!**/wwwroot/dist/**  # unignore files under those folders
+build/
+.storybook-static/
+/.cache/
+.vite/
+
+# Vue / Vite / other frameworks
+.env
+.env.*.local
+local.env
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Parcel / Netlify / Vercel caches
+.cache/
+.netlify/
+.vercel/
+
+# Static analysis / IDE tools
+ReSharper*/
+*.DotSettings.user
+.idea/
+*.sln.iml
+
+# Docker
+docker-compose.override.yml
+.docker/
+
+# Key-store / signing
+*.keystore
+*.pfx
+*.cer
+
+# Generated files and lock files excluded from ignore (keep lockfiles)
+# If you intentionally want to ignore lockfiles for ephemeral infra, uncomment the next lines
+# package-lock.json
+# yarn.lock
+
+# Editor temporary files
+*~
+*.swp
+*.swo
+*.swn
+
+# System files
+ehthumbs.db
+Icon?
+
+# Local developer secrets (optional)
+secrets.json
+secrets.*
+
+# Dotnet's runtimehost policy file
+runtimeconfig.dev.json
+
+# Local Emulators / dev tools
+.localhistory/
+
+# mac, linux specific
+.serverless/
+
+# Protect executable output
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Optional: ignore coverage output
+coverage/
+
+# Optional: ignore npm lockfile temporary state created by some package managers (.package-lock.json*)
+# .package-lock.json

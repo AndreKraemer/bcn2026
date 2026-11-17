@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="DontLetMeExpire.Views.ItemChatPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:strings="clr-namespace:DontLetMeExpire.Resources.Strings"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewModels="clr-namespace:DontLetMeExpire.ViewModels"
+    Title="{x:Static strings:AppResources.AskAi}"
+    x:DataType="viewModels:ItemChatViewModel">
+    <ContentPage.Resources>
+        <toolkit:IsNotNullConverter x:Key="IsNotNullConverter" />
+    </ContentPage.Resources>
+
+    <Grid Padding="{StaticResource ThicknessS}" RowDefinitions="auto, auto, *, auto, auto" RowSpacing="{StaticResource SizeXS}">
+
+        <!--  Kopf: Lebensmittel mit Bild und Datum  -->
+        <Grid ColumnDefinitions="56, *" ColumnSpacing="{StaticResource SizeS}">
+            <Border
+                BackgroundColor="{StaticResource PrimaryLightLight}"
+                HeightRequest="56"
+                StrokeShape="RoundRectangle 28"
+                StrokeThickness="0"
+                WidthRequest="56">
+                <Image
+                    Aspect="AspectFill"
+                    IsVisible="{Binding Image, Converter={StaticResource IsNotNullConverter}}"
+                    Source="{Binding Image}" />
+            </Border>
+            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="{StaticResource SizeL}"
+                    Text="{Binding Title}" />
+                <Label Text="{Binding Subtitle}" TextColor="Gray" />
+            </VerticalStackLayout>
+        </Grid>
+
+        <!--  Vordefinierte Fragen als Chips  -->
+        <FlexLayout
+            Grid.Row="1"
+            BindableLayout.ItemsSource="{Binding SuggestedQuestions}"
+            Wrap="Wrap">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate x:DataType="x:String">
+                    <Border
+                        Margin="0,0,6,6"
+                        Padding="12,6"
+                        Stroke="{StaticResource Primary}"
+                        StrokeShape="RoundRectangle 16">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:ItemChatViewModel}}, Path=AskCommand}" CommandParameter="{Binding .}" />
+                        </Border.GestureRecognizers>
+                        <Label Text="{Binding .}" TextColor="{StaticResource Primary}" />
+                    </Border>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </FlexLayout>
+
+        <!--  Verlauf  -->
+        <CollectionView
+            Grid.Row="2"
+            ItemsSource="{Binding Messages}"
+            ItemsUpdatingScrollMode="KeepLastItemInView">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="viewModels:AdviceEntry">
+                    <Grid Padding="0,4">
+                        <Border
+                            Padding="{StaticResource ThicknessS}"
+                            HorizontalOptions="{Binding Alignment}"
+                            MaximumWidthRequest="600"
+                            StrokeShape="RoundRectangle 12"
+                            StrokeThickness="0">
+                            <Border.Triggers>
+                                <DataTrigger Binding="{Binding IsUser}" TargetType="Border" Value="True">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsUser}" TargetType="Border" Value="False">
+                                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource PrimaryLightLight}, Dark={StaticResource PrimaryDarkDark}}" />
+                                </DataTrigger>
+                            </Border.Triggers>
+                            <VerticalStackLayout Spacing="6">
+                                <!--  Urteil als farbiges Badge  -->
+                                <Border
+                                    Padding="10,4"
+                                    BackgroundColor="{Binding VerdictColor}"
+                                    HorizontalOptions="Start"
+                                    IsVisible="{Binding HasVerdict}"
+                                    StrokeShape="RoundRectangle 10"
+                                    StrokeThickness="0">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        Text="{Binding VerdictText}"
+                                        TextColor="White" />
+                                </Border>
+                                <Label Text="{Binding Text}">
+                                    <Label.Triggers>
+                                        <DataTrigger Binding="{Binding IsUser}" TargetType="Label" Value="True">
+                                            <Setter Property="TextColor" Value="White" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                                <Label IsVisible="{Binding HasChecks}" Text="{Binding Checks}" />
+                                <Label
+                                    FontSize="11"
+                                    IsVisible="{Binding HasVerdict}"
+                                    Text="{Binding Source}"
+                                    TextColor="Gray" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!--  Foto auf Nachfrage des Modells  -->
+        <Grid
+            Grid.Row="3"
+            ColumnDefinitions="auto, *, auto, auto"
+            ColumnSpacing="{StaticResource SizeXS}">
+            <Button Command="{Binding TakePhotoCommand}" Text="{x:Static strings:AppResources.TakePhotoForAi}">
+                <Button.Triggers>
+                    <!--  Hervorheben, wenn das Modell um ein Foto bittet  -->
+                    <DataTrigger Binding="{Binding PhotoRequested}" TargetType="Button" Value="True">
+                        <Setter Property="BackgroundColor" Value="#6A5AE0" />
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+            <Entry
+                Grid.Column="1"
+                ReturnCommand="{Binding SendCommand}"
+                Text="{Binding Input}" />
+            <ActivityIndicator
+                Grid.Column="2"
+                IsRunning="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}"
+                WidthRequest="24" />
+            <Button
+                Grid.Column="3"
+                Command="{Binding SendCommand}"
+                FontFamily="MaterialSymbolsRounded"
+                FontSize="{StaticResource SizeL}"
+                Text="{StaticResource IconSend}" />
+        </Grid>
+
+        <!--  Fester Hinweis aus dem Code, nicht vom Modell  -->
+        <Label
+            Grid.Row="4"
+            FontSize="12"
+            HorizontalTextAlignment="Center"
+            Text="{Binding Disclaimer}"
+            TextColor="Gray" />
+    </Grid>
+</ContentPage>

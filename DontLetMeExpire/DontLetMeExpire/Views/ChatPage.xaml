@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="DontLetMeExpire.Views.ChatPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ai="clr-namespace:DontLetMeExpire.AI"
+    xmlns:strings="clr-namespace:DontLetMeExpire.Resources.Strings"
+    xmlns:viewModels="clr-namespace:DontLetMeExpire.ViewModels"
+    Title="{x:Static strings:AppResources.PantryChat}"
+    x:DataType="viewModels:ChatViewModel">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding NewChatCommand}" Text="{x:Static strings:AppResources.NewChat}" />
+    </ContentPage.ToolbarItems>
+
+    <Grid Padding="{StaticResource ThicknessS}" RowDefinitions="*, auto, auto" RowSpacing="{StaticResource SizeXS}">
+
+        <!--  Nachrichten  -->
+        <CollectionView ItemsSource="{Binding Messages}" ItemsUpdatingScrollMode="KeepLastItemInView">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="viewModels:ChatEntry">
+                    <Grid Padding="0,4">
+                        <Border
+                            Padding="{StaticResource ThicknessS}"
+                            HorizontalOptions="{Binding Alignment}"
+                            MaximumWidthRequest="600"
+                            StrokeShape="RoundRectangle 12"
+                            StrokeThickness="0">
+                            <Border.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding IsUser}"
+                                    TargetType="Border"
+                                    Value="True">
+                                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}" />
+                                </DataTrigger>
+                                <DataTrigger
+                                    Binding="{Binding IsUser}"
+                                    TargetType="Border"
+                                    Value="False">
+                                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource PrimaryLightLight}, Dark={StaticResource PrimaryDarkDark}}" />
+                                </DataTrigger>
+                            </Border.Triggers>
+                            <Label Text="{Binding Text}">
+                                <Label.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding IsUser}"
+                                        TargetType="Label"
+                                        Value="True">
+                                        <Setter Property="TextColor" Value="{StaticResource White}" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!--  Live-Protokoll der Tool-Aufrufe (in den Einstellungen abschaltbar)  -->
+        <Border
+            Grid.Row="1"
+            Padding="{StaticResource ThicknessXS}"
+            IsVisible="{Binding ShowToolCalls}"
+            MaximumHeightRequest="160"
+            Stroke="{AppThemeBinding Light={StaticResource PrimaryLightDark},
+                                     Dark={StaticResource PrimaryDarkLightest}}"
+            StrokeShape="RoundRectangle 8">
+            <ScrollView>
+                <VerticalStackLayout Spacing="{StaticResource SizeXXS}">
+                    <Label StyleClass="bold" Text="{x:Static strings:AppResources.ToolCalls}" />
+                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding ToolCalls}" Spacing="{StaticResource SizeXXS}">
+                        <BindableLayout.EmptyView>
+                            <Label FontSize="12" Text="–" />
+                        </BindableLayout.EmptyView>
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="ai:ToolCallEntry">
+                                <VerticalStackLayout>
+                                    <Label FontFamily="Consolas" FontSize="13">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Status}" />
+                                                <Span Text=" 🔧 " />
+                                                <Span FontAttributes="Bold" Text="{Binding Name}" />
+                                                <Span Text="(" />
+                                                <Span Text="{Binding Arguments}" />
+                                                <Span Text=")  " />
+                                                <Span Text="{Binding Duration}" TextColor="Gray" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label
+                                        Margin="24,0,0,0"
+                                        FontSize="12"
+                                        LineBreakMode="TailTruncation"
+                                        MaxLines="2"
+                                        Text="{Binding Result, StringFormat='→ {0}'}"
+                                        TextColor="Gray" />
+                                </VerticalStackLayout>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </ScrollView>
+        </Border>
+
+        <!--  Eingabe: Text oder Sprache  -->
+        <Grid
+            Grid.Row="2"
+            ColumnDefinitions="*, auto, auto"
+            ColumnSpacing="{StaticResource SizeXS}">
+            <Entry
+                Placeholder="{x:Static strings:AppResources.ChatPlaceholder}"
+                ReturnCommand="{Binding SendCommand}"
+                Text="{Binding Input}" />
+            <Button
+                Grid.Column="1"
+                Command="{Binding SpeakCommand}"
+                FontFamily="MaterialSymbolsRounded"
+                FontSize="{StaticResource SizeL}"
+                Text="{StaticResource IconMic}">
+                <Button.Triggers>
+                    <DataTrigger
+                        Binding="{Binding IsListening}"
+                        TargetType="Button"
+                        Value="True">
+                        <Setter Property="BackgroundColor" Value="{StaticResource ErrorDark}" />
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+            <Button
+                Grid.Column="2"
+                Command="{Binding SendCommand}"
+                FontFamily="MaterialSymbolsRounded"
+                FontSize="{StaticResource SizeL}"
+                SemanticProperties.Description="{x:Static strings:AppResources.Send}"
+                Text="{StaticResource IconSend}" />
+        </Grid>
+    </Grid>
+</ContentPage>

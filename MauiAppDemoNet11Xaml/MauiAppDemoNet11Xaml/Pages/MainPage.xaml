@@ -1,0 +1,89 @@
+﻿<ContentPage x:Class="MauiAppDemoNet11Xaml.Pages.MainPage"
+             x:DataType="MainPageModel"
+             x:Name="OverviewPage"
+             Title="{Today.ToUpper()}"
+             Appearing="{(s,e) => ((MainPageModel)BindingContext).AppearingCommand.Execute(null)}"
+             NavigatedTo="{(s,e) => ((MainPageModel)BindingContext).NavigatedToCommand.Execute(null)}"
+             NavigatedFrom="{(s,e) => ((MainPageModel)BindingContext).NavigatedFromCommand.Execute(null)}">
+    <!--
+      https://github.com/dotnet/maui/issues/40328 
+      <x:Code><![CDATA[
+        async void OnButtonClicked(object sender, EventArgs e)
+        {
+            await this.DisplayAlert("Code in XAML", "Hello from x:Code", "OK");
+        }
+    ]]></x:Code>-->
+    <Grid>
+        <SfPullToRefresh
+            IsRefreshing="{IsRefreshing}"
+            RefreshCommand="{Binding RefreshCommand}">
+            <SfPullToRefresh.PullableContent>
+                <ScrollView>
+                    <Grid Padding="{StaticResource LayoutPadding}" RowSpacing="{StaticResource LayoutSpacing}"
+                          RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
+
+                        <Label Grid.Row="0" Text="Task Categories" Style="{StaticResource Title2}" SemanticProperties.HeadingLevel="Level1"/>
+                        <Button Text="Alert Demo" Clicked="{(s, e) => DisplayAlertAsync('Clicked in XAML', 'Clicked in XAML C# Expressions', 'OK'); }" HorizontalOptions="Center"/>
+                        <!--<Button Text="Alert Demo" Clicked="OnButtonClicked" HorizontalOptions="End"/>-->
+                        <CategoryChart Grid.Row="1" />
+                        <Label Grid.Row="2" Text="Projects" Style="{StaticResource Title2}" SemanticProperties.HeadingLevel="Level1"/>
+                        <CollectionView Grid.Row="3" ItemsSource="{Projects}"
+                                        Margin="-7.5,0"
+                                        MinimumHeightRequest="250"
+                                        x:Name="ProjectsCollectionView"
+                                        SelectionMode="Single"
+                                        SelectedItem="{SelectedProject}"
+                                        SelectionChangedCommand="{Binding NavigateToProjectCommand, Source={RelativeSource AncestorType={x:Type MainPageModel}}, x:DataType=MainPageModel}"
+                                        SelectionChangedCommandParameter="{SelectedProject}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="7.5"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="Project">
+                                    <ProjectCardView WidthRequest="200" />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                        <Grid Grid.Row="4" MinimumHeightRequest="44">
+                            <Label Text="{Tasks.Count == 1 ? '1 Task' : $'{Tasks.Count} Tasks'}" Style="{StaticResource Title2}" VerticalOptions="Center" SemanticProperties.HeadingLevel="Level1"/>
+                            <Label Text="{Projects.Count > 0 ? $'AVG {(double)Tasks.Count / Projects.Count:0.##} tasks per project': ''}" HorizontalOptions="End"/>
+                            <ImageButton 
+                                Source="{StaticResource IconClean}"
+                                HorizontalOptions="End"
+                                VerticalOptions="Center"
+                                Aspect="Center"
+                                HeightRequest="44"
+                                WidthRequest="44"
+                                IsVisible="{HasCompletedTasks}"
+                                Command="{Binding CleanTasksCommand}"
+                                SemanticProperties.Description="Clean tasks" />
+                        </Grid>
+                        <CollectionView ItemsSource="{Tasks}"
+                                        Grid.Row="5"
+                                        x:Name="TasksCollectionView"
+                                        SelectionMode="Single"
+                                        SelectedItem="{SelectedTask}"
+                                        SelectionChangedCommand="{Binding NavigateToTaskCommand}"
+                                        SelectionChangedCommandParameter="{SelectedTask}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical"
+                                                   ItemSpacing="15"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <TaskView TaskCompletedCommand="{Binding TaskCompletedCommand, Source={RelativeSource AncestorType={x:Type MainPageModel}}, x:DataType=MainPageModel}"/>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Grid>
+                </ScrollView>
+            </SfPullToRefresh.PullableContent>
+        </SfPullToRefresh>
+
+        <AddButton 
+            IsEnabled="{!IsBusy}"
+            Command="{Binding AddTaskCommand}"
+            ToolTipProperties.Text="Add task"
+            SemanticProperties.Description="Add task" />
+    </Grid>
+</ContentPage>
